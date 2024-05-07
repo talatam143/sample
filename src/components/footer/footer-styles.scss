@@ -1,0 +1,52 @@
+$footerBackgroundColor: #393e46;
+$primaryColor: #00adb5;
+$secondaryColor: #eeeeee;
+
+.footer-container {
+  background-color: $footerBackgroundColor;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .footer-name {
+    color: $secondaryColor;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .footer-project-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .footer-project-heading {
+      font-size: 24px;
+      font-weight: 600;
+      color: $primaryColor;
+      margin-right: 5px;
+      text-decoration: none;
+    }
+
+    p {
+      color: #ffffff;
+      line-height: 1.7;
+      word-break: break-all;
+    }
+  }
+
+  .footer-git-container {
+    display: flex;
+    align-items: center;
+
+    .transaction-git-link {
+      background-color: $secondaryColor;
+      width: 600px;
+      margin: 5px;
+      border-radius: 4px;
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: fit-content;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import React from "react";
 
+
+//Animated loading component for books component
 const LoadingPage = () => {
   return (
     <table className="books-table">
@@ -15,7 +17,7 @@ const LoadingPage = () => {
         </tr>
       </thead>
       <tbody className="books-table-body" style={{ background: "#FFFFFF" }}>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((eachItem) => (
+        {[0, 1, 2, 3, 4, 5, 6].map((eachItem) => (
           <tr key={eachItem}>
             {[0, 1, 2, 3, 4, 5, 6].map((eachData) => (
               <td key={eachData}>

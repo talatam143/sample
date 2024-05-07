@@ -1,0 +1,37 @@
+$headerBackgroundColor: #222831;
+$headerTextColor: #00adb5;
+
+.header-container {
+  background-color: $headerBackgroundColor;
+  color: $headerTextColor;
+  padding: 10px 0 10px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: #32325d40 0px 2px 5px -1px, #0000004d 0px 1px 3px -1px;
+
+  svg {
+    width: 40px;
+    flex-shrink: 0;
+    stroke-width: 2.3;
+  }
+
+  .header-title {
+    font-weight: 700;
+    font-size: 26px;
+    cursor: pointer;
+  }
+
+  @media (width < 700px) {
+    .header-container {
+      .header-title {
+        font-size: 22px;
+        width: 300px;
+      }
+      svg {
+        width: 60px;
+        stroke-width: 2;
+      }
+    }
+  }
+}

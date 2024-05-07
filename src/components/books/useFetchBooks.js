@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { apiState } from "../../utils/enums";
 
+
+//Custom hook for fetching the api response state and books data
 function useFetchBooks() {
   const [books, setBooks] = useState([]);
   const [fetchState, setFetchState] = useState(apiState.LOADING);

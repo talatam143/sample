@@ -1,8 +1,10 @@
 import React from "react";
 import linkIcon from "../../assets/link.svg";
 import githubICon from "../../assets/github.svg";
-import "./footer-styles.css";
+import "./footer-styles.scss";
 
+
+//Footer component with name and personal project details
 const Footer = () => {
   return (
     <div className="footer-container">

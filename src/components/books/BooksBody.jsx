@@ -1,14 +1,18 @@
 import React from "react";
-import "./books-styles.css";
+import "./books-styles.scss";
 import useFetchBooks from "./useFetchBooks";
 import { apiState } from "../../utils/enums";
 import error from "../../assets/error.png";
 import LoadingPage from "./LoadingPage";
 import Books from "./Books";
 
+
+//Books body component
 const BooksBody = () => {
+  //Custom hook for fetching the api response state and books data
   const { books, fetchState } = useFetchBooks();
 
+  //Rendering the respective component based on the api state
   const BooksState = () => {
     switch (fetchState) {
       case apiState.LOADING:

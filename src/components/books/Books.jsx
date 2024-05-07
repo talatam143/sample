@@ -7,6 +7,8 @@ import sortAscending from "../../assets/sort-ascending.svg";
 import sortDescending from "../../assets/sort-descending.svg";
 import arrowsSort from "../../assets/arrows-sort.svg";
 
+
+//Initial sort type for table columns
 const initialFilterState = {
   author: "default",
   title: "default",
@@ -14,11 +16,14 @@ const initialFilterState = {
   publicationDate: "default",
 };
 
+
+//Books table component
 const Books = (props) => {
   const { booksData } = props;
   const [books, setBooks] = useState(booksData);
   const [filterState, setFilterState] = useState(initialFilterState);
 
+  //Function to format the publication Date
   const formatDate = (date) => {
     try {
       const dateFormat = new Date(date);
@@ -31,63 +36,49 @@ const Books = (props) => {
     }
   };
 
+
+  //Function to handle books sorting for title, author, estimated reading time and publication date fields
   const handleFilter = (type) => {
     let tempBooks = [...books];
+
+    //Handling sort type
+    filterState[type] === "desc" ?
+      setFilterState((prevState) => ({ ...prevState, [type]: "asec" })) :
+      setFilterState((prevState) => ({ ...prevState, [type]: "desc" }));
+
+    //Handling sorting
     if (["author", "title"].includes(type)) {
-      if (["default", "asec"].includes(filterState[type])) {
-        setFilterState((prevState) => ({ ...prevState, [type]: "desc" }));
-        tempBooks.sort(function (a, b) {
-          if (a[type] > b[type]) return 1;
-          if (a[type] < b[type]) return -1;
-          return 0;
-        });
-      } else if (filterState[type] === "desc") {
-        setFilterState((prevState) => ({ ...prevState, [type]: "asec" }));
-        tempBooks.sort(function (a, b) {
-          if (a[type] < b[type]) return 1;
-          if (a[type] > b[type]) return -1;
-          return 0;
-        });
-      }
+      tempBooks.sort(function (a, b) {
+        if (a[type] < b[type]) return filterState[type] === "desc" ? 1 : -1;
+        if (a[type] > b[type]) return filterState[type] === "desc" ? -1 : 1;
+        return 0;
+      });
     } else if (type === "estimatedReadingTimeMinutes") {
-      if (["default", "asec"].includes(filterState[type])) {
-        setFilterState((prevState) => ({ ...prevState, [type]: "desc" }));
-        tempBooks.sort(function (a, b) {
-          return a.estimatedReadingTimeMinutes - b.estimatedReadingTimeMinutes;
-        });
-      } else if (filterState[type] === "desc") {
-        setFilterState((prevState) => ({ ...prevState, [type]: "asec" }));
-        tempBooks.sort(function (a, b) {
-          return b.estimatedReadingTimeMinutes - a.estimatedReadingTimeMinutes;
-        });
-      }
+      tempBooks.sort(function (a, b) {
+        return filterState[type] === "desc" ?
+          b.estimatedReadingTimeMinutes - a.estimatedReadingTimeMinutes :
+          a.estimatedReadingTimeMinutes - b.estimatedReadingTimeMinutes
+      });
     } else if (type === "publicationDate") {
-      if (["default", "asec"].includes(filterState[type])) {
-        setFilterState((prevState) => ({ ...prevState, [type]: "desc" }));
-        tempBooks.sort(function (a, b) {
-          return (
-            new Date(a.publicationDate).getTime() -
-            new Date(b.publicationDate).getTime()
-          );
-        });
-      } else if (filterState[type] === "desc") {
-        setFilterState((prevState) => ({ ...prevState, [type]: "asec" }));
-        tempBooks.sort(function (a, b) {
-          return (
-            new Date(b.publicationDate).getTime() -
-            new Date(a.publicationDate).getTime()
-          );
-        });
-      }
+      tempBooks.sort(function (a, b) {
+        const dateA = new Date(a.publicationDate).getTime();
+        const dateB = new Date(b.publicationDate).getTime()
+        return filterState[type] === "desc" ?
+          dateB - dateA :
+          dateA - dateB
+      });
     }
     setBooks(tempBooks);
   };
 
+
+  //Function to reset the books sort
   const resetBooksFilter = () => {
     setBooks(booksData);
     setFilterState(initialFilterState);
   };
 
+  //Table heading wrapper components for headings with sort functionality
   const TableTh = (props) => {
     const { text, type } = props;
     return (
@@ -103,8 +94,8 @@ const Books = (props) => {
                 ["author", "title"].includes(type)
                   ? sortAscendingLetters
                   : type === "estimatedReadingTimeMinutes"
-                  ? sortAscendingNumbers
-                  : sortAscending
+                    ? sortAscendingNumbers
+                    : sortAscending
               }
               alt="sort-icon"
             />
@@ -114,8 +105,8 @@ const Books = (props) => {
                 ["author", "title"].includes(type)
                   ? sortDescendingLetters
                   : type === "estimatedReadingTimeMinutes"
-                  ? sortDescendingNumbers
-                  : sortDescending
+                    ? sortDescendingNumbers
+                    : sortDescending
               }
               alt="sort-icon"
             />
@@ -133,6 +124,7 @@ const Books = (props) => {
     );
   };
 
+  //Table component for books
   return (
     <table className="books-table">
       <thead className="books-table-header">

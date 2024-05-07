@@ -1,0 +1,211 @@
+$tableBackgroundColor: #393e46;
+$tableHeaderBackgroundColor: #222831;
+$tableBodyBackgroundColor: #eeeeee;
+$loadingContainerColor: #ededed;
+$headerTextColor: #00adb5;
+
+.books-container {
+  width: 100%;
+  overflow-x: auto;
+
+  .books-table {
+    text-align: center;
+    background-color: $tableBackgroundColor;
+    border-radius: 10px;
+    width: 90%;
+    margin: 30px auto;
+
+    td {
+      padding: 5px 10px;
+
+      .loading-div {
+        height: 50px;
+        border-radius: 7px;
+        width: 180px;
+        background-color: $loadingContainerColor;
+        background: linear-gradient(
+            100deg,
+            #ffffff00 40%,
+            #ffffff80 50%,
+            #ffffff00 60%
+          )
+          $loadingContainerColor;
+        background-size: 200% 100%;
+        background-position-x: 180%;
+        animation: 1s loading-div ease-in-out infinite;
+      }
+    }
+
+    .books-table-header {
+      background-color: $tableHeaderBackgroundColor;
+      border-radius: 10px;
+      color: $headerTextColor;
+      box-shadow: #3c40434d 0px 1px 2px 0px, #3c404326 0px 1px 3px 1px;
+
+      th {
+        padding: 5px 20px;
+      }
+
+      tr :nth-child(1) {
+        border-radius: 10px 0 0 10px;
+      }
+
+      tr :last-child {
+        border-radius: 0 10px 10px 0;
+      }
+      .table-sort-button,
+      .table-restore-button {
+        background-color: transparent;
+        border: none;
+        color: $headerTextColor;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin: auto;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .table-restore-button {
+        background-image: url("../../assets/restore.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 23px;
+        height: 23px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+
+      .books-table-filter-th {
+        position: relative;
+      }
+
+      .table-sort-buttons > img {
+        width: 30px;
+      }
+    }
+
+    .books-table-body {
+      background-color: $tableBodyBackgroundColor;
+      margin-top: 10px;
+
+      :nth-child(1) td:nth-child(1) {
+        border-radius: 10px 0 0 0;
+      }
+
+      :nth-child(1) td:last-child {
+        border-radius: 0 10px 0 0;
+      }
+
+      :last-child td:nth-child(1) {
+        border-radius: 0 0 0 10px;
+      }
+
+      :last-child td:last-child {
+        border-radius: 0 0 10px 0;
+      }
+
+      .table-cover-container {
+        width: 180px;
+        height: 180px;
+        overflow: hidden;
+
+        .books-cover-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: transform 1s;
+        }
+
+        .books-cover-image:hover {
+          transform: scale(0.95);
+        }
+      }
+
+      .books-table-authorBiography-td {
+        height: 100px;
+        width: 100%;
+        min-width: 350px;
+
+        div {
+          height: 100%;
+          overflow-y: auto;
+        }
+      }
+      .books-table-body-rows div {
+        height: 0px;
+        animation: animateTableData 0.8s ease-out forwards;
+      }
+
+      @keyframes animateTableData {
+        from {
+          height: 0px;
+        }
+
+        to {
+          height: 250px;
+        }
+      }
+    }
+
+    .books-error-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 50px;
+    }
+
+    @keyframes loading-div {
+      to {
+        background-position-x: -30%;
+      }
+    }
+
+    @media (width < 1250px) {
+      @keyframes animateTableData {
+        from {
+          height: 0px;
+        }
+
+        to {
+          height: 200px;
+        }
+      }
+
+      .books-table-authorBiography-td > div {
+        width: calc(100vw - 100px);
+      }
+
+      .books-table-sno-th,
+      .books-table-sno-td {
+        position: sticky;
+        left: 0;
+        box-shadow: #00000026 1.95px 1.95px 2.6px;
+      }
+
+      .books-table-sno-th {
+        background-color: $tableHeaderBackgroundColor;
+        z-index: 10;
+      }
+
+      .books-table-sno-td {
+        background-color: $tableBodyBackgroundColor;
+      }
+
+      .table-cover-container {
+        width: 140px;
+        height: 240px;
+      }
+
+      .books-cover-image {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
